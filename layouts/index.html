@@ -1,12 +1,12 @@
 {{ define "title" }} {{ .Title }} {{ end }} {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<h1 class="page-title">{{ .Title }}</h1>
 
 {{ .Content }}
 
 <div id="my-gallery" class="pswp-gallery">
   {{ range $group := (readDir "assets/gallery") }}
   <div class="gallery-group">
-    <h2>{{ $group.Name | title }}</h2>
+    <h2 class="group-title">{{ $group.Name | title }}</h2>
     <div class="gallery-items">
       {{ $imagePattern := printf "gallery/%s/*" $group.Name }} {{ range $image
       := resources.Match $imagePattern }} {{ if eq $image.MediaType.MainType
