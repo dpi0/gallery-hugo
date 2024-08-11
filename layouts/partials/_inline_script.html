@@ -8,6 +8,9 @@
     showHideAnimationType: "zoom",
     showAnimationDuration: 300,
     hideAnimationDuration: 300,
+    loop: false,
+    padding: { top: 20, bottom: 40, left: 100, right: 100 },
+    indexIndicatorSep: " of ",
 
     gallery: "#my-gallery",
     children: "a",
@@ -15,6 +18,64 @@
   };
 
   const lightbox = new PhotoSwipeLightbox(options);
+
+  lightbox.on("uiRegister", function () {
+    lightbox.pswp.ui.registerElement({
+      name: "custom-caption",
+      order: 9,
+      isButton: false,
+      appendTo: "root",
+      html: "Caption text",
+      onInit: (el, pswp) => {
+        lightbox.pswp.on("change", () => {
+          const currSlideElement = lightbox.pswp.currSlide.data.element;
+          let captionHTML = "";
+          if (currSlideElement) {
+            const hiddenCaption = currSlideElement.querySelector(
+              ".hidden-caption-content"
+            );
+            if (hiddenCaption) {
+              // get caption from element with class hidden-caption-content
+              captionHTML = hiddenCaption.innerHTML;
+            } else {
+              // get caption from alt attribute
+              captionHTML = currSlideElement
+                .querySelector("img")
+                .getAttribute("alt");
+            }
+          }
+          el.innerHTML = captionHTML || "";
+        });
+      },
+    });
+  });
+
+  lightbox.on("uiRegister", function () {
+    lightbox.pswp.ui.registerElement({
+      name: "download-button",
+      order: 8,
+      isButton: true,
+      tagName: "a",
+
+      html: {
+        isCustomSVG: true,
+        inner:
+          '<path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" id="pswp__icn-download"/>',
+        outlineID: "pswp__icn-download",
+      },
+
+      onInit: (el, pswp) => {
+        el.setAttribute("download", "");
+        el.setAttribute("target", "_blank");
+        el.setAttribute("rel", "noopener");
+
+        pswp.on("change", () => {
+          console.log("change");
+          el.href = pswp.currSlide.data.src;
+        });
+      },
+    });
+  });
 
   lightbox.init();
 </script>

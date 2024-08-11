@@ -43,3 +43,27 @@ a {
     grid-template-columns: 1fr; /* Stack images on top of each other */
   }
 }
+.pswp__custom-caption {
+  background: #181818bf;
+  font-size: 16px;
+  color: #eee;
+  width: auto;
+  max-width: 90%;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.hidden-caption-content {
+  display: none;
+}
