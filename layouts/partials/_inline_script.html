@@ -1,0 +1,20 @@
+<script type="module">
+  import PhotoSwipeLightbox from "https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.js";
+  import PhotoSwipe from "https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.esm.js";
+
+  const options = {
+    bgOpacity: 0.9,
+
+    showHideAnimationType: "zoom",
+    showAnimationDuration: 300,
+    hideAnimationDuration: 300,
+
+    gallery: "#my-gallery",
+    children: "a",
+    pswpModule: PhotoSwipe,
+  };
+
+  const lightbox = new PhotoSwipeLightbox(options);
+
+  lightbox.init();
+</script>

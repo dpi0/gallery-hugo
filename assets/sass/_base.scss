@@ -1,3 +1,45 @@
 body {
   font-family: Poppins;
 }
+
+.pswp-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.gallery-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-items {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(400px, 1fr)
+  ); /* thumbnail size 400px */
+  gap: 5px;
+}
+
+.gallery-items img {
+  width: 100%;
+  max-width: 100%;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: filter 0.1s ease;
+}
+
+.gallery-items img:hover {
+  filter: brightness(0.8);
+}
+
+a {
+  -webkit-tap-highlight-color: transparent; /* For Chrome, Safari, and most Android browsers */
+}
+
+@media (max-width: 800px) {
+  .gallery-items {
+    grid-template-columns: 1fr; /* Stack images on top of each other */
+  }
+}

@@ -1,3 +1,27 @@
 {{ define "title" }} {{ .Title }} {{ end }} {{ define "main" }}
 <h1>{{ .Title }}</h1>
-{{ .Content }} {{ end }}
+
+{{ .Content }}
+
+<div id="my-gallery" class="pswp-gallery">
+  {{ range $group := (readDir "assets/gallery") }}
+  <div class="gallery-group">
+    <h2>{{ $group.Name | title }}</h2>
+    <div class="gallery-items">
+      {{ $imagePattern := printf "gallery/%s/*" $group.Name }} {{ range $image
+      := resources.Match $imagePattern }} {{ if eq $image.MediaType.MainType
+      "image" }}
+      <a
+        href="{{ $image.Permalink }}"
+        data-pswp-width="{{ $image.Width }}"
+        data-pswp-height="{{ $image.Height }}"
+      >
+        <img src="{{ $image.RelPermalink }}" alt="{{ $image.Name }}" />
+      </a>
+      {{ end }} {{ end }}
+    </div>
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}
